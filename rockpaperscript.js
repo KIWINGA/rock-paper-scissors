@@ -8,11 +8,13 @@ function getComputerChoice(){
 function playRound(playerSelection, computerSelection) {
     switch(playerSelection) {
         case 'rock':
-            if(computerSelection === 'rock') {
+            if(computerSelection.toLowerCase === 'rock') {
                 return 'draw';
             } else if(computerSelection === 'paper') {
+                computerScore++;
                 return 'You lose :( Paper beats Rock.';
             } else {
+                userScore++;
                 return 'You win :) Rock beats Scissors';
             }
         break;
@@ -21,9 +23,11 @@ function playRound(playerSelection, computerSelection) {
             if(computerSelection === 'paper') {
                 return 'Draw';
             } else if(computerSelection === 'scissors') {
+                computerScore++;
                 return 'You lose :( Scissors beats Paper.';
             } else {
-                return 'Ypu win :) Paper beats Rock.';
+                userScore++;
+                return 'You win :) Paper beats Rock.';
             }
         break;
 
@@ -31,13 +35,32 @@ function playRound(playerSelection, computerSelection) {
             if(computerSelection === 'scissors') {
                 return 'draw';
             } else if(computerSelection === 'rock') {
+                computerScore++;
                 return 'You Lose :( Rock beats Scissors.';
             } else {
+                userScore++;
                 return 'You Win :) Scissors beats Paper.'
             }
         break;
     }
 }
-const playerSelection = 'rock';
+const playerSelection = prompt('Enter rock, paper or scissors.').toLowerCase();
 const computerSelection = getComputerChoice();
-console.log(playRound(playerSelection, computerSelection));
+var userScore = 0;
+var computerScore = 0;
+
+function game() {
+    for(i = 0; i < 5; i++) {
+        playRound(playerSelection, computerSelection);
+
+        if(userScore > computerScore) {
+            return 'You win!';
+        } else if(userScore === computerScore) {
+            return 'You tied.';
+        } else {
+            return 'You lost.';
+        }
+    }
+    }
+
+console.log(game());
